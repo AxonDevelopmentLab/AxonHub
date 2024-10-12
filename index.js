@@ -2,11 +2,10 @@ const express = require('express');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const cmd = require('node-cmd');
 const crypto = require('crypto');
 const path = require('path')
 const cors = require("cors");
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 
 const app = express();
 
@@ -15,14 +14,14 @@ app.post('/git', (req, res) => {
   let hmac = crypto.createHmac("sha1", process.env.SECRET);
   let sig  = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
   if (req.headers['x-github-event'] == "push" && sig == req.headers['x-hub-signature']) {
-    cmd.run('chmod 777 ./git.sh'); 
+    execSync('chmod 777 ./git.sh'); 
     setTimeout(() => {
       exec('./git.sh', (err, stdout, stderr) => {
         if (stdout) console.log(stdout);
         if (err) console.error(stderr);
       });
 
-      cmd.run('refresh');
+      execSync('refresh');
     }, 10000)
   };
   
