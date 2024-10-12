@@ -9,7 +9,7 @@ const cors = require("cors");
 const { exec } = require('child_process');
 
 const app = express();
-console.log('files updatet est')
+console.log('glitch sync test')
 
 app.use(bodyParser.json());
 app.post('/git', (req, res) => {
