@@ -1,26 +1,26 @@
 const Statuses = [
     {
-        Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_InstalockAPP.webp?v=1728108947358',
+        Icon: 'https://axon-cdn.glitch.me/images/WEBP_InstalockAPP.webp',
         Name: 'InstalockAPP',
         URL: 'https://raw.githubusercontent.com/AxonDevelopmentLab/AppsDetails/main/instalockapp.json'
     },
     {
-        Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_AxonAPI.webp?v=1728108944471',
+        Icon: 'https://axon-cdn.glitch.me/images/WEBP_AxonAPI.webp',
         Name: 'Axon API',
         URL: 'https://axon-api.glitch.me/'
     },
     {
-        Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_AxonCDN.webp?v=1728108945025',
+        Icon: 'https://axon-cdn.glitch.me/images/WEBP_AxonCDN.webp',
         Name: 'Axon CDN',
         URL: 'https://axon-cdn.glitch.me/'
     },
     {
-        Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_AXSC.webp?v=1728108946799',
+        Icon: 'https://axon-cdn.glitch.me/images/WEBP_AXSC.webp',
         Name: 'AXSC Int.',
         URL: 'https://axsc.glitch.me/'
     },
     {
-        Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_AxonSync.webp?v=1728108946247',
+        Icon: 'https://axon-cdn.glitch.me/images/WEBP_AxonSync.webp',
         Name: 'Axon Sync',
         URL: 'https://axonsync.glitch.me/'
     }
