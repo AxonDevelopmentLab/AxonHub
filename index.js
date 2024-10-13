@@ -48,7 +48,6 @@ routes.forEach(route => {
     });
 });
 
-app.use((req, res) => { res.sendFile(path.join(__dirname, 'web', 'unknown_page.html')); });
 app.post('/git', (req, res) => {
   let hmac = crypto.createHmac("sha1", process.env.SECRET);
   let sig  = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
@@ -60,5 +59,7 @@ app.post('/git', (req, res) => {
   
   return res.sendStatus(200);
 });
+
+app.use((req, res) => { res.sendFile(path.join(__dirname, 'web', 'unknown_page.html')); });
 
 const server = app.listen(8080, () => { console.log('[AxonHub] Service is running.')});
