@@ -79,7 +79,7 @@ function subtotalCalculator() {
 DISCOUNT_INPUT.addEventListener('keydown', (e) => { if (e.key === 'Enter') {
   DISCOUNT_INPUT.disabled = true;
   
-  $.post(`https://axon-api.glitch.me/store/checkout/discount`, { discount: DISCOUNT_INPUT.value }).done(function (data) {
+  $.post(`https://axon-api.glitch.me/store/checkout/discount`, { discount: DISCOUNT_INPUT.value, token: localStorage.getItem('auth_token') }).done(function (data) {
     if (data.status === 400) { DISCOUNT_INPUT.disabled = false; return alert('Código promocional inválido.'); }
     if (data.status === 200) {
       alert('Código promocional aplicado com sucesso.');
