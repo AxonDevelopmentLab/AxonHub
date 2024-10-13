@@ -27,7 +27,7 @@ app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
     imgSrc: ["'self'", "data:", "https://cdn.glitch.global"],
-    connectSrc: ["'self'", "https://axon-cdn.glitch.me", "https://axon-api.glitch.me/", "https://raw.githubusercontent.com/AxonDevelopmentLab/AppsDetails/main/instalockapp.json", "https://axon-sync.glitch.me/", "https://axsc.glitch.me"],
+    connectSrc: ["'self'", "https://axonsync.glitch.me/", "https://axon-cdn.glitch.me", "https://axon-api.glitch.me/", "https://raw.githubusercontent.com/AxonDevelopmentLab/AppsDetails/main/instalockapp.json", "https://axon-sync.glitch.me/", "https://axsc.glitch.me"],
     scriptSrcAttr: ["'self'", "'unsafe-inline'"]
   }
 }));
