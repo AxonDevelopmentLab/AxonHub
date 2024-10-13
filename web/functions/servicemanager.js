@@ -1,12 +1,12 @@
 const services = {
   'instalock': {
-    'windows_download': ''
+    'windows_download': 'https://axon-cdn.glitch.me/files/InstalockAPP-Installer.exe'
   },
   'axsc': {
-    'windows_download': '',
-    'linux_download': '',
-    'macos_download': '',
-    'opensource': ''
+    'windows_download': 'https://github.com/akkui/AXSC-Client/releases/download/v1.0.1/axsc-win.exe',
+    'linux_download': 'https://github.com/akkui/AXSC-Client/releases/download/v1.0.1/axsc-linux',
+    'macos_download': 'https://github.com/akkui/AXSC-Client/releases/download/v1.0.1/axsc-macos',
+    'opensource': 'https://github.com/akkui/AXSC-Client'
   }
 }
 
@@ -20,6 +20,6 @@ function getLink(Service, Name) {
   const getURL = services[Service][Name];
   
   const AxonHubURL = new URL(window.location.href).origin;
-  window.open(`${AxonHubURL}/discord`, '_blank')
+  if (getURL !== 'opensource') window.open(`${AxonHubURL}/discord`, '_blank')
   window.location.href = getURL;
 };
