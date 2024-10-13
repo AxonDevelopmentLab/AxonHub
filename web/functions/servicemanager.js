@@ -1,6 +1,6 @@
 const services = {
   'instalock': {
-    'windows_download': 'https://axon-cdn.glitch.me/files/InstalockAPP-Installer.exe'
+    'windows_download': 'https://www.dropbox.com/scl/fi/pxsvzfu4wy99dm4bx1728/InstalockAPP-Installer.exe?rlkey=e0nrvjtnnczy01hj4loefad1q&st=8cb5whcb&dl=1'
   },
   'axsc': {
     'windows_download': 'https://github.com/akkui/AXSC-Client/releases/download/v1.0.1/axsc-win.exe',
