@@ -1,41 +1,21 @@
-const express = require('express');
+const { execSync } = require('child_process');
 const compression = require('compression');
 const bodyParser = require('body-parser');
+const express = require('express');
 const helmet = require('helmet');
 const crypto = require('crypto');
-const path = require('path')
+const path = require('path');
 const cors = require("cors");
-const { execSync } = require('child_process');
-
 const app = express();
 
-app.use(bodyParser.json());
-app.post('/git', (req, res) => {
-  let hmac = crypto.createHmac("sha1", process.env.SECRET);
-  let sig  = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
-  if (req.headers['x-github-event'] == "push" && sig == req.headers['x-hub-signature']) {
-    execSync('chmod 777 ./git.sh'); 
-    execSync('./git.sh')
-    execSync('refresh');
-  };
-  
-  return res.sendStatus(200);
-});
-
-app.use(helmet());
-app.use(helmet.contentSecurityPolicy({
+app.use(helmet(), helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
     imgSrc: ["'self'", "data:", "https://axon-cdn.glitch.me/"],
     connectSrc: ["'self'", "https://axonsync.glitch.me/", "https://axon-cdn.glitch.me", "https://axon-api.glitch.me/", "https://raw.githubusercontent.com/AxonDevelopmentLab/AppsDetails/main/instalockapp.json", "https://axon-sync.glitch.me/", "https://axsc.glitch.me"],
     scriptSrcAttr: ["'self'", "'unsafe-inline'"]
   }
-}));
-
-app.use(express.json({ limit: '1mb' }));
-app.use(express.urlencoded({ limit: '1mb', extended: true }));
-app.use(compression(), cors());
-app.use(express.static(path.join(__dirname, 'web')));
+}), bodyParser.json(), express.json({ limit: '1mb' }), express.urlencoded({ limit: '1mb', extended: true }), compression(), cors(), express.static(path.join(__dirname, 'web')));
 
 const routes = [
   { url: '/robots.txt', type: 'file', content: 'robots.txt' },
@@ -68,8 +48,17 @@ routes.forEach(route => {
     });
 });
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'web', 'unknown_page.html'));
+app.use((req, res) => { res.sendFile(path.join(__dirname, 'web', 'unknown_page.html')); });
+app.post('/git', (req, res) => {
+  let hmac = crypto.createHmac("sha1", process.env.SECRET);
+  let sig  = "sha1=" + hmac.update(JSON.stringify(req.body)).digest("hex");
+  if (req.headers['x-github-event'] == "push" && sig == req.headers['x-hub-signature']) {
+    execSync('chmod 777 ./git.sh'); 
+    execSync('./git.sh')
+    execSync('refresh');
+  };
+  
+  return res.sendStatus(200);
 });
 
 const server = app.listen(8080, () => { console.log('[AxonHub] Service is running.')});
