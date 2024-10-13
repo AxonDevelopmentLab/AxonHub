@@ -22,7 +22,7 @@ const Statuses = [
     {
         Icon: 'https://cdn.glitch.global/7ad28ccd-58c1-41f4-b83f-e0c15c4569ec/WEBP_AxonSync.webp?v=1728108946247',
         Name: 'Axon Sync',
-        URL: 'https://axon-sync.glitch.me/'
+        URL: 'https://axonsync.glitch.me/'
     }
 ];
 
