@@ -20,6 +20,6 @@ function getLink(Service, Name) {
   const getURL = services[Service][Name];
   
   const AxonHubURL = new URL(window.location.href).origin;
-  if (getURL !== 'opensource') window.open(`${AxonHubURL}/discord`, '_blank')
+  if (Name !== 'opensource') window.open(`${AxonHubURL}/discord`, '_blank')
   window.location.href = getURL;
 };
