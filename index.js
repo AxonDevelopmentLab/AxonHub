@@ -43,6 +43,7 @@ const routes = [
   { url: '/open-source', type: 'file', content: 'open_source.html' },
   { url: '/privacy-politics', type: 'file', content: 'privacy-politics.html' },
   { url: '/terms-of-use', type: 'file', content: 'terms-of-use.html' },
+  { url: '/terms-of-purchase-and-refund', type: 'file', content: 'terms-of-purchase-and-refund.html' },
   { url: '/services', type: 'file', content: 'services.html' },
   { url: '/services/instalock', type: 'file', content: 'services_instalock.html' },
   { url: '/services/axsc', type: 'file', content: 'services_axsc.html' },

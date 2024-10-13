@@ -1,4 +1,4 @@
-if (localStorage.getItem('shopping.cart') && !['store/checkout', 'account'].includes(window.location.pathname.substring(1, window.location.pathname.length))) localStorage.removeItem('shopping.cart');
+if (localStorage.getItem('shopping.cart') && !['store/checkout', 'account', 'terms-of-purchase-and-refund'].includes(window.location.pathname.substring(1, window.location.pathname.length))) localStorage.removeItem('shopping.cart');
 
 function redirect(GoTo) {
     const url = new URL(window.location.href).origin;
