@@ -1,5 +1,3 @@
-const SERVICES_REQUIRED = ['account'];
-
 let CACHE_currentDevicePage = 0;
 let CACHE_currentPage = 'overview';
 let CACHE;
@@ -9,8 +7,8 @@ const params = new URLSearchParams(currentUrl.search);
 const menu_params = params.get('menu');
 
 if (localStorage.getItem('auth_token')) {
-    $.post(`https://axon-api.glitch.me/account/get`, { token: localStorage.getItem('auth_token'), services: SERVICES_REQUIRED }).done(function (data) {
-        if (data.status === 400) { localStorage.removeItem('auth_token'); redirect('account'); };
+    $.post(`https://axon-api.glitch.me/account/get`, { token: localStorage.getItem('auth_token'), services: ['account'] }).done(function (data) {
+        if (data.status === 401) { localStorage.removeItem('auth_token'); redirect('account'); };
         if (data.status === 200) {
           CACHE = data.services;
           document.getElementById('menu').style.visibility = 'visible';
@@ -39,7 +37,7 @@ function formularySendHttp(Args) {
             return window.location.href = data.redirect;
         };
 
-        formularyCallback(data.message);
+        if (data.message) formularyCallback(data.message);
         updateDashboardStatus();
     }).fail(function (failed) { return allCategories['disconnect'](); })
 }
@@ -238,8 +236,8 @@ function changeCategory(newCategory) {
 };
 
 function updateDashboardStatus() {
-    $.post(`https://axon-api.glitch.me/account/get`, { token: localStorage.getItem('auth_token'), services: SERVICES_REQUIRED }).done(function (data) {
-        if (data.status === 400) { localStorage.removeItem('auth_token'); redirect('account'); };
+    $.post(`https://axon-api.glitch.me/account/get`, { token: localStorage.getItem('auth_token'), services: ['account'] }).done(function (data) {
+        if (data.status === 401) { localStorage.removeItem('auth_token'); redirect('account'); };
         if (data.status === 200) { CACHE = data.services; changeCategory(CACHE_currentPage); };
     }).fail(function (failed) { localStorage.removeItem('auth_token'); redirect('account'); });
 }

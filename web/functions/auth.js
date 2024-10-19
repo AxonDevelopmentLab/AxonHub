@@ -8,9 +8,9 @@ if (redirect_content) redirect_content = redirect_content.split(',');
 
 if (redirect_param === null) {
     if (localStorage.getItem('auth_token')) {
-      redirect('account/dashboard');
+        redirect('account/dashboard');
     } else {
-      document.getElementById('page').style.visibility = 'visible';
+        document.getElementById('page').style.visibility = 'visible';
     }
 } else {
     document.getElementById('page').style.visibility = 'visible';
@@ -34,9 +34,10 @@ const MessagePresets = {
 };
 
 if (message_params !== null) {
-    if (Object.keys(MessagePresets).includes(message_params)) { sendMessage(MessagePresets[message_params])
+    if (Object.keys(MessagePresets).includes(message_params)) {
+        sendMessage(MessagePresets[message_params])
     } else { sendMessage(message_params); }
-};  
+};
 
 const USERNAME = document.getElementById('username');
 const EMAIL = document.getElementById('email');
@@ -61,39 +62,41 @@ function auth() {
 
     if (USERNAME.disabled) delete GenerateAuthObject['username'];
     if (CONFIRM_PASSWORD.disabled) delete GenerateAuthObject['confirm_password'];
-  
+
     USERNAME.value = "";
     EMAIL.value = "";
     PASSWORD.value = "";
     CONFIRM_PASSWORD.value = "";
-  
+
     sendMessage('Aguarde...', (60000 * 5));
 
     $.post(`https://axon-api.glitch.me/auth/${cache_typeOf}`, GenerateAuthObject).done(function (data) {
-        if (data.status === 400) return sendMessage(data.message);
-        localStorage.setItem('auth_token', data.auth_pass);
+        if (data.message) sendMessage(data.message);
+        if (data.status === 200) {
+            localStorage.setItem('auth_token', data.auth_pass);
 
-        if (redirect_param !== null) {
-            let first_param = true;
-            let url = redirect_param + '?';
+            if (redirect_param !== null) {
+                let first_param = true;
+                let url = redirect_param + '?';
 
-            const acceptedParaments = {
-                "id": () => {
-                    if (!first_param) url = url + '&';
-                    url += `id=${data.account_id}`;
-                    first_param = false;
-                },
-                "code": () => {
-                    if (!first_param) url = url + '&';
-                    url += `code=${params.get('code')}`;
-                    first_param = false;
-                }
-            };
+                const acceptedParaments = {
+                    "id": () => {
+                        if (!first_param) url = url + '&';
+                        url += `id=${data.account_id}`;
+                        first_param = false;
+                    },
+                    "code": () => {
+                        if (!first_param) url = url + '&';
+                        url += `code=${params.get('code')}`;
+                        first_param = false;
+                    }
+                };
 
-            if (redirect_content) for (const content of redirect_content) try { acceptedParaments[content]() } catch (err) { undefined };
-            window.location.href = url;
-        } else {
-            location.reload();
+                if (redirect_content) for (const content of redirect_content) try { acceptedParaments[content]() } catch (err) { undefined };
+                window.location.href = url;
+            } else {
+                location.reload();
+            }
         }
     }).fail(function (failed) {
         return sendMessage('O servidor está fora de ar!<br><b onclick="window.location.href=`https://axonhub.glitch.me/status/`">https://axonhub.glitch.me/status/</b>');

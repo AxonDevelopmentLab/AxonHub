@@ -48,6 +48,7 @@ function disconnectDevice(SessionID) {
         token: localStorage.getItem('auth_token'),
         session_id: SessionID
     }).done(function (data) {
+        if (data.status === 401) { localStorage.removeItem('auth_token'); redirect('account'); };
         if (data.status === 200) return updateDashboardStatus();
         return changeCategory('disconnect');
     }).fail(function (failed) {
