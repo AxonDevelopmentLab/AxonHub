@@ -8,12 +8,13 @@ const menu_params = params.get('menu');
 
 if (localStorage.getItem('auth_token')) {
     $.post(`https://axon-api.glitch.me/account/get`, { token: localStorage.getItem('auth_token'), services: ['account'] }).done(function (data) {
-        if (data.status === 401) { localStorage.removeItem('auth_token'); redirect('account'); };
         if (data.status === 200) {
           CACHE = data.services;
           document.getElementById('menu').style.visibility = 'visible';
           if (menu_params) { changeCategory(menu_params); } else { changeCategory('overview'); }
-        };
+        } else {
+            localStorage.removeItem('auth_token'); redirect('account');
+        }
     }).fail(function (failed) { localStorage.removeItem('auth_token'); redirect('account'); })
 } else { redirect('account') };
 

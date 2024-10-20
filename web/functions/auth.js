@@ -72,7 +72,7 @@ function auth() {
 
     $.post(`https://axon-api.glitch.me/auth/${cache_typeOf}`, GenerateAuthObject).done(function (data) {
         if (data.message) sendMessage(data.message);
-        if (data.status === 200) {
+        if (data.status === 200 && data.auth_pass) {
             localStorage.setItem('auth_token', data.auth_pass);
 
             if (redirect_param !== null) {
