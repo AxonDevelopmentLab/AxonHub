@@ -227,10 +227,10 @@ function changeCategory(newCategory) {
     const availableCategories = Object.keys(allCategories);
   
     document.getElementById('dashboard.formulary').style.display = "none";
-    document.getElementById(CACHE_currentPage).style.color = '#ffffff';
+    document.getElementById(CACHE_currentPage).style.fontWeight = 'normal';
   
     if (!availableCategories.includes(newCategory)) return allCategories['overview']();
-    document.getElementById(newCategory).style.color = '#9a91b5';
+    document.getElementById(newCategory).style.fontWeight = 'bold';
 
     CACHE_currentPage = newCategory;
     return allCategories[`${newCategory}`]();
